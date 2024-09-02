@@ -1,0 +1,10 @@
+.user-details {
+  margin-right: 20px;
+  text-align: center;
+}
+
+.user-details img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}

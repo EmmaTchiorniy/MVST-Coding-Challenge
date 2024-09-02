@@ -1,0 +1,18 @@
+#root {
+  position: relative; /* Ensure the dropdown is positioned relative to this container */
+  max-width: none; /* Temporarily remove max-width constraint for testing */
+  padding: 0; /* Temporarily remove padding for testing */
+  text-align: left; /* Adjust text alignment if necessary */
+}
+
+.App-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  margin-left: 10px;
+}
+
+.search-bar {
+  padding: 9px;
+}
