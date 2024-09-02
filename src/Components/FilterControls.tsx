@@ -32,25 +32,6 @@ function FilterControls({
         value={nameFilter}
         onChange={onNameFilterChange}
       />
-      <div className="dropdown-container" ref={dropdownRef}>
-        <button className="dropdown-button" onClick={onToggleDropdown}>
-          {dropdownVisible ? "Hide Filters" : "Languages"}
-        </button>
-        <div className={`dropdown-list ${dropdownVisible ? "show" : ""}`}>
-          {languages.map((language) => (
-            <div key={language} className="dropdown-item">
-              <input
-                type="checkbox"
-                id={language}
-                value={language.toLowerCase()}
-                checked={langValues.includes(language.toLowerCase())}
-                onChange={onLanguageChange}
-              />
-              <label htmlFor={language}>{language}</label>
-            </div>
-          ))}
-        </div>
-      </div>
       <button className="clear-filters-button" onClick={onClearFilters}>
         Clear All Filters
       </button>
