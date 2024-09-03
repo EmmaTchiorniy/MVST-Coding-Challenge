@@ -30,6 +30,9 @@ function UserDetails({ username }: UserDetailsProps) {
         width: "100%",
         borderRadius: "20px", // Rounded corners
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Light shadow
+        position: "sticky", // Make the card sticky
+        top: 50, // Adjust the top position to control where it sticks
+        zIndex: 10, // Ensure the card is above other content
       }}
     >
       <CardMedia

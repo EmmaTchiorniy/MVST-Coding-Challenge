@@ -1,33 +1,34 @@
 import React, { useState } from "react";
 import Repositories from "./Components/Repos";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Button, TextField, Container, Box, Typography } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home"; // Import HomeIcon
+import { Button, TextField, Container, Box } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
 
 const queryClient = new QueryClient();
 
-const App: React.FC = () => {
+function App() {
   const [username, setUsername] = useState<string>("");
   const [searchUsername, setSearchUsername] = useState<string>("");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUsername(e.target.value);
-  };
+  }
 
-  const handleSearch = () => {
+  function handleSearch() {
     setSearchUsername(username);
-  };
+  }
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       handleSearch();
     }
-  };
+  }
 
-  const handleHome = () => {
+  function handleHome() {
     setUsername("");
     setSearchUsername("");
-  };
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -36,35 +37,47 @@ const App: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          bgcolor: "#ffffff", // White background
+          bgcolor: "#f6f8fa",
           minHeight: "100vh",
           padding: 4,
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Light shadow for container
+          overflowY: "auto", // Ensure container scrolls if content is too long
         }}
       >
-        <Typography variant="h3" component="h1" sx={{ mb: 4, fontWeight: 600 }}>
-          GitHub Repository Viewer
-        </Typography>
-        <Box
-          sx={{ display: "flex", gap: 2, mb: 4, width: "100%", maxWidth: 500 }}
+        <h1>GitHub Repository Viewer</h1>
+        <Button
+          variant="contained"
+          sx={{
+            mt: 2,
+            mb: 5,
+            bgcolor: "#0366d6",
+            ":hover": {
+              bgcolor: "#0356a1",
+            },
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+          onClick={handleHome}
         >
+          <HomeIcon sx={{ fontSize: 24 }} /> Home
+        </Button>
+        <Box sx={{ display: "flex", gap: 2, mb: 0 }}>
           <TextField
-            label="Enter GitHub username"
+            label="GitHub Username"
             variant="outlined"
             value={username}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
             sx={{
-              flex: 1,
+              width: "100%",
+              maxWidth: 400,
+              minWidth: 250,
               "& .MuiInputBase-root": {
-                borderRadius: "20px", // Rounded corners
+                height: 45,
               },
               "& .MuiInputLabel-root": {
-                fontSize: "1rem", // Modern font size for label
-              },
-              "& .MuiOutlinedInput-root": {
-                padding: "0 12px", // Consistent padding
-                borderRadius: "20px", // Rounded corners
+                top: -5,
+                left: 5,
               },
             }}
           />
@@ -75,37 +88,23 @@ const App: React.FC = () => {
               ":hover": {
                 bgcolor: "#218838", // Darker green for hover
               },
-              borderRadius: "20px", // Rounded corners
-              height: "100%",
-              padding: "0 20px", // Consistent padding
+              minWidth: 115,
+              height: "44px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1, // Space between icon and text
             }}
             onClick={handleSearch}
           >
+            <SearchIcon sx={{ fontSize: 24 }} />
             Search
           </Button>
         </Box>
-        <Button
-          variant="outlined"
-          startIcon={<HomeIcon />}
-          sx={{
-            mb: 4,
-            borderColor: "#0366d6", // GitHub blue border
-            color: "#0366d6",
-            ":hover": {
-              borderColor: "#0356a1", // Darker blue for hover
-              backgroundColor: "#f0f6fc", // Light background for hover
-            },
-            borderRadius: "20px", // Rounded corners
-            padding: "6px 16px", // Consistent padding
-          }}
-          onClick={handleHome}
-        >
-          Home
-        </Button>
         {searchUsername && <Repositories username={searchUsername} />}
       </Container>
     </QueryClientProvider>
   );
-};
+}
 
 export default App;

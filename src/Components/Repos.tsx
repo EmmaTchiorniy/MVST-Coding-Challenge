@@ -61,7 +61,8 @@ function Repositories({ username }: RepositoriesProps) {
   }
 
   if (isLoading) return "Loading...";
-  if (error)
+  if (error) {
+    clearFilters();
     return (
       <Box sx={{ textAlign: "center", mt: 4 }}>
         <Typography variant="h6" color="error">
@@ -76,12 +77,15 @@ function Repositories({ username }: RepositoriesProps) {
               bgcolor: "#0356a1",
             },
           }}
-          onClick={() => refetch()}
+          onClick={() => {
+            refetch();
+          }}
         >
           Try Again
         </Button>
       </Box>
     );
+  }
 
   return (
     <Box
@@ -111,35 +115,57 @@ function Repositories({ username }: RepositoriesProps) {
           onClearFilters={clearFilters}
           languages={uniqueLanguages}
         />
-        <List sx={{ width: "100%" }}>
-          {filteredRepos.length === 0 ? (
-            <Typography>No repositories found</Typography>
-          ) : (
-            filteredRepos.map((repo: Repository) => (
+        <Box
+          sx={{
+            border: "1px solid #e1e4e8",
+            borderRadius: 2,
+            padding: 2,
+            mt: 2,
+            backgroundColor: "#fff",
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <List sx={{ width: "100%" }}>
+            {filteredRepos.length === 0 ? (
               <Box
-                key={repo.id}
+                key={"Not found"}
                 sx={{
                   border: "1px solid #e1e4e8",
                   borderRadius: 2,
+                  borderColor: "#f1807e",
                   mb: 2,
                   p: 2,
                 }}
               >
-                <Link
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ display: "block", fontWeight: 600, mb: 1 }}
-                >
-                  {repo.name}
-                </Link>
-                <Typography variant="body2" color="text.secondary">
-                  {repo.language || "No language"}
-                </Typography>
+                <Typography color="error">No Repositories Found</Typography>
               </Box>
-            ))
-          )}
-        </List>
+            ) : (
+              filteredRepos.map((repo: Repository) => (
+                <Box
+                  key={repo.id}
+                  sx={{
+                    border: "1px solid #e1e4e8",
+                    borderRadius: 2,
+                    mb: 2,
+                    p: 2,
+                  }}
+                >
+                  <Link
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ display: "block", fontWeight: 600, mb: 1 }}
+                  >
+                    {repo.name}
+                  </Link>
+                  <Typography variant="body2" color="text.secondary">
+                    {repo.language || "No language"}
+                  </Typography>
+                </Box>
+              ))
+            )}
+          </List>
+        </Box>
       </Box>
     </Box>
   );

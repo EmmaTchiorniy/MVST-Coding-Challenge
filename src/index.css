@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   background-color: #f6f8fa; /* Ensure background color is applied here */
 }
 
@@ -17,5 +18,11 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+}
+
+/* index.css */
+html,
+body {
+  height: 100%;
+  margin: 0;
 }

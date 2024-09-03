@@ -58,6 +58,7 @@ function FilterControls({
         alignItems: "center",
         gap: 2,
         flexWrap: "wrap",
+        mb: 3,
       }}
     >
       <TextField
@@ -92,6 +93,7 @@ function FilterControls({
         sx={{
           borderColor: "#d9534f",
           color: "#d9534f",
+          borderWidth: "medium",
           ":hover": {
             borderColor: "#c9302c",
             backgroundColor: "#f2dede",
