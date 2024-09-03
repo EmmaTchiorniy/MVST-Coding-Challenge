@@ -25,27 +25,30 @@ function UserDetails({ username }: UserDetailsProps) {
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        width: 300,
-        borderRadius: 2,
-        boxShadow: 3,
-        bgcolor: "#f6f8fa", // Light background similar to GitHub
+        padding: 2,
+        maxWidth: 220,
+        width: "100%",
+        borderRadius: "20px", // Rounded corners
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Light shadow
       }}
     >
       <CardMedia
         component="img"
-        sx={{ width: 150, borderRadius: "50%" }}
+        sx={{
+          width: 120, // Adjusted profile picture width
+          height: 120, // Maintain aspect ratio
+          borderRadius: "50%", // Circular image
+          mb: 2,
+          mt: 2,
+        }}
         image={data.avatar_url}
         alt={username}
       />
       <CardContent>
-        <Typography component="div" variant="h5" sx={{ fontWeight: 600 }}>
-          {data.name || "No Name"}
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          {data.name}
         </Typography>
-        <Typography
-          variant="subtitle1"
-          component="div"
-          sx={{ color: "text.secondary", fontWeight: 300 }}
-        >
+        <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
           {username}
         </Typography>
       </CardContent>

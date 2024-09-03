@@ -3,7 +3,7 @@ import FilterControls from "./FilterComponents/FilterControls";
 import "./Repos.css";
 import UserDetails from "./User";
 import { useQuery } from "@tanstack/react-query";
-import { Box, Typography, Button, Link, List, ListItem } from "@mui/material";
+import { Box, Typography, Button, Link, List } from "@mui/material";
 
 interface Repository {
   id: number;
@@ -84,45 +84,63 @@ function Repositories({ username }: RepositoriesProps) {
     );
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 800, mt: 4 }}>
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        Repositories of {username}
-      </Typography>
-      <FilterControls
-        nameFilter={nameFilter}
-        selectedLanguages={selectedLanguages}
-        onNameFilterChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setNameFilter(e.target.value)
-        }
-        updateSelectedLanguages={updateSelectedLanguages}
-        onClearFilters={clearFilters}
-        languages={uniqueLanguages}
-      />
-      <UserDetails username={username} />
-      <List sx={{ width: "100%" }}>
-        {filteredRepos.length === 0 ? (
-          <Typography>No repositories found</Typography>
-        ) : (
-          filteredRepos.map((repo: Repository) => (
-            <Box
-              key={repo.id}
-              sx={{ border: "1px solid #e1e4e8", borderRadius: 2, mb: 2, p: 2 }}
-            >
-              <Link
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ display: "block", fontWeight: 600, mb: 1 }}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        maxWidth: "1200px",
+        mx: "auto",
+        mt: 4,
+      }}
+    >
+      <Box sx={{ flex: "1", mr: 2 }}>
+        <UserDetails username={username} />
+      </Box>
+      <Box sx={{ flex: "2" }}>
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          Repositories of {username}
+        </Typography>
+        <FilterControls
+          nameFilter={nameFilter}
+          selectedLanguages={selectedLanguages}
+          onNameFilterChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setNameFilter(e.target.value)
+          }
+          updateSelectedLanguages={updateSelectedLanguages}
+          onClearFilters={clearFilters}
+          languages={uniqueLanguages}
+        />
+        <List sx={{ width: "100%" }}>
+          {filteredRepos.length === 0 ? (
+            <Typography>No repositories found</Typography>
+          ) : (
+            filteredRepos.map((repo: Repository) => (
+              <Box
+                key={repo.id}
+                sx={{
+                  border: "1px solid #e1e4e8",
+                  borderRadius: 2,
+                  mb: 2,
+                  p: 2,
+                }}
               >
-                {repo.name}
-              </Link>
-              <Typography variant="body2" color="text.secondary">
-                {repo.language || "No language"}
-              </Typography>
-            </Box>
-          ))
-        )}
-      </List>
+                <Link
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ display: "block", fontWeight: 600, mb: 1 }}
+                >
+                  {repo.name}
+                </Link>
+                <Typography variant="body2" color="text.secondary">
+                  {repo.language || "No language"}
+                </Typography>
+              </Box>
+            ))
+          )}
+        </List>
+      </Box>
     </Box>
   );
 }

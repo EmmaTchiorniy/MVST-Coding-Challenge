@@ -10,6 +10,7 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  Box,
 } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
@@ -50,15 +51,23 @@ function FilterControls({
   }
 
   return (
-    <div className="controls-container">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 2,
+        flexWrap: "wrap",
+      }}
+    >
       <TextField
         label="Filter by name..."
         variant="outlined"
         value={nameFilter}
         onChange={onNameFilterChange}
-        sx={{ mb: 2, width: "100%", maxWidth: 400 }}
+        sx={{ flex: 1, maxWidth: 300 }} // Ensure it expands as needed
       />
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ minWidth: 200 }}>
         <InputLabel id="demo-multiple-checkbox-label">Language</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -81,21 +90,27 @@ function FilterControls({
       <Button
         variant="outlined"
         sx={{
-          borderColor: "#0366d6",
-          color: "#0366d6",
+          borderColor: "#d9534f",
+          color: "#d9534f",
           ":hover": {
-            borderColor: "#0356a1",
-            backgroundColor: "#f0f6fc", // Light background for hover
+            borderColor: "#c9302c",
+            backgroundColor: "#f2dede",
+            color: "#c9302c",
           },
+          minWidth: 200,
+          height: "56px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
         onClick={() => {
           onClearFilters();
-          updateSelectedLanguage([]);
+          updateSelectedLanguages([]);
         }}
       >
         Clear All Filters
       </Button>
-    </div>
+    </Box>
   );
 }
 
