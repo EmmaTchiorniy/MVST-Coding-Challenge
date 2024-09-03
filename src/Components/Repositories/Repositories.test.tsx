@@ -1,10 +1,10 @@
-// Repositories.test.tsx
-import { render, screen } from "@testing-library/react";
-import Repositories from "./Repositories";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useQuery } from "@tanstack/react-query"; // Import useQuery directly
-import React from "react";
-import UserDetails from "../UserDetails/UserDetails";
+// // Repositories.test.tsx
+// import { render, screen } from "@testing-library/react";
+// import Repositories from "./Repositories";
+// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query"; // Import useQuery directly
+// import React from "react";
+// import UserDetails from "../UserDetails/UserDetails";
 
 // const queryClient = new QueryClient();
 

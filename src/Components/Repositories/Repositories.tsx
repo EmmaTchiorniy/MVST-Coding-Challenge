@@ -74,6 +74,7 @@ function Repositories({ username }: RepositoriesProps) {
   if (isLoading) {
     return "Loading...";
   }
+
   if (error) {
     clearFilters();
     return (

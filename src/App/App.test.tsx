@@ -1,7 +1,7 @@
 // App.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
-import React from "react";
+// import React from "react";
 import Repositories from "../Components/Repositories/Repositories";
 import "@testing-library/jest-dom";
 

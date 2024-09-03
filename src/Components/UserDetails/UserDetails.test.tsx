@@ -1,11 +1,11 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import UserDetails from "./UserDetails";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+// import React from "react";
+// import { render, screen } from "@testing-library/react";
+// import UserDetails from "./UserDetails";
+// import {
+//   QueryClient,
+//   QueryClientProvider,
+//   useQuery,
+// } from "@tanstack/react-query";
 
 // Tests don't work because of mui
 
