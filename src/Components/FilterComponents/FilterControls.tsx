@@ -9,6 +9,7 @@ import {
   Button,
   Select,
   SelectChangeEvent,
+  TextField,
 } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
@@ -44,18 +45,18 @@ function FilterControls({
       target: { value },
     } = event;
     updateSelectedLanguages(
-      typeof value === "string" ? value.split(",") : (value as string[])
+      typeof value === "string" ? value.split(",") : value
     );
   }
 
   return (
     <div className="controls-container">
-      <input
-        type="text"
-        className="search-bar"
-        placeholder="Filter by name..."
+      <TextField
+        label="Filter by name..."
+        variant="outlined"
         value={nameFilter}
         onChange={onNameFilterChange}
+        sx={{ mb: 2, width: "100%", maxWidth: 400 }}
       />
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Language</InputLabel>
@@ -69,19 +70,27 @@ function FilterControls({
           renderValue={(selected: string[]) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {languages.map((aa) => (
-            <MenuItem key={aa} value={aa}>
-              <Checkbox checked={selectedLanguages.indexOf(aa) > -1} />
-              <ListItemText primary={aa} />
+          {languages.map((language) => (
+            <MenuItem key={language} value={language}>
+              <Checkbox checked={selectedLanguages.indexOf(language) > -1} />
+              <ListItemText primary={language} />
             </MenuItem>
           ))}
         </Select>
       </FormControl>
       <Button
         variant="outlined"
+        sx={{
+          borderColor: "#0366d6",
+          color: "#0366d6",
+          ":hover": {
+            borderColor: "#0356a1",
+            backgroundColor: "#f0f6fc", // Light background for hover
+          },
+        }}
         onClick={() => {
           onClearFilters();
-          updateSelectedLanguages([]);
+          updateSelectedLanguage([]);
         }}
       >
         Clear All Filters

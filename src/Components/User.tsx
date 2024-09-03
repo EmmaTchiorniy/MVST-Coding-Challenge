@@ -1,5 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import "./User.css";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 interface UserDetailsProps {
@@ -7,7 +6,7 @@ interface UserDetailsProps {
 }
 
 function UserDetails({ username }: UserDetailsProps) {
-  const { isPending, error, data } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["userDetails", username],
     queryFn: () =>
       fetch(`https://api.github.com/users/${username}`).then((res) =>
@@ -15,40 +14,41 @@ function UserDetails({ username }: UserDetailsProps) {
       ),
   });
 
-  if (isPending) return "Loading...";
+  if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
-  console.log(data);
+
   return (
     <Card
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        width: 300,
+        borderRadius: 2,
+        boxShadow: 3,
+        bgcolor: "#f6f8fa", // Light background similar to GitHub
       }}
     >
       <CardMedia
         component="img"
-        sx={{ width: 151 }}
+        sx={{ width: 150, borderRadius: "50%" }}
         image={data.avatar_url}
         alt={username}
       />
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h5">
-            {data.name}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            component="div"
-            sx={{ color: "text.secondary" }}
-          >
-            {username}
-          </Typography>
-        </CardContent>
-      </Box>
+      <CardContent>
+        <Typography component="div" variant="h5" sx={{ fontWeight: 600 }}>
+          {data.name || "No Name"}
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          component="div"
+          sx={{ color: "text.secondary", fontWeight: 300 }}
+        >
+          {username}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
