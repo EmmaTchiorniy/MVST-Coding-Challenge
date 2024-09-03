@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterControls from "../FilterControls/FilterControls";
 import UserDetails from "../UserDetails/UserDetails";
 import { useQuery } from "@tanstack/react-query";
@@ -65,8 +65,15 @@ function Repositories({ username }: RepositoriesProps) {
     setSelectedLanguages([]);
   }
 
+  // Clear filters when username changes
+  useEffect(() => {
+    clearFilters();
+  }, [username]);
+
   // Deal with different API states
-  if (isLoading) return "Loading...";
+  if (isLoading) {
+    return "Loading...";
+  }
   if (error) {
     clearFilters();
     return (
