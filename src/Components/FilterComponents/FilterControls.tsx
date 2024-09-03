@@ -13,6 +13,7 @@ import {
   Box,
 } from "@mui/material";
 
+// Styling for multiple-select dropdown
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -24,6 +25,7 @@ const MenuProps = {
   },
 };
 
+// Defining interface
 interface FilterControlsProps {
   nameFilter: string;
   onNameFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,6 +43,7 @@ function FilterControls({
   onClearFilters,
   languages,
 }: FilterControlsProps) {
+  // Function for handling user selections and updating filter in parent component
   function handleChange(event: SelectChangeEvent<string[]>) {
     const {
       target: { value },
@@ -50,6 +53,7 @@ function FilterControls({
     );
   }
 
+  // html with styling
   return (
     <Box
       sx={{

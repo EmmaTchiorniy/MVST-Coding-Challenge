@@ -1,7 +1,6 @@
 import { useState } from "react";
 import FilterControls from "./FilterComponents/FilterControls";
-import "./Repos.css";
-import UserDetails from "./User";
+import UserDetails from "./UserDetails";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Typography, Button, Link, List } from "@mui/material";
 
@@ -17,13 +16,16 @@ interface RepositoriesProps {
 }
 
 function Repositories({ username }: RepositoriesProps) {
+  // useStates for name input and selected languages for filtering repositories
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [nameFilter, setNameFilter] = useState("");
 
+  // Wrapper function for child components
   function updateSelectedLanguages(languages: string[]) {
     setSelectedLanguages(languages);
   }
 
+  // Fetching repositories from Github API call
   const {
     isLoading,
     error,
@@ -37,12 +39,14 @@ function Repositories({ username }: RepositoriesProps) {
       ),
   });
 
+  // Storing repository languages with no copies
   const uniqueLanguages: string[] = repos
     ? Array.from(
         new Set(repos.map((repo: Repository) => repo.language).filter(Boolean))
       )
     : [];
 
+  // Filtering repositories based on name and/or selected language(s)
   const filteredRepos = repos?.filter((repo: Repository) => {
     const matchesName = repo.name
       .toLowerCase()
@@ -55,11 +59,13 @@ function Repositories({ username }: RepositoriesProps) {
     return matchesName && matchesLanguage;
   });
 
+  // Remove all filters
   function clearFilters() {
     setNameFilter("");
     setSelectedLanguages([]);
   }
 
+  // Deal with different API states
   if (isLoading) return "Loading...";
   if (error) {
     clearFilters();
@@ -87,6 +93,7 @@ function Repositories({ username }: RepositoriesProps) {
     );
   }
 
+  // Return html & in-line styling, as well as calling FilterControls & UserDetails functions
   return (
     <Box
       sx={{
@@ -95,7 +102,6 @@ function Repositories({ username }: RepositoriesProps) {
         width: "100%",
         maxWidth: "1200px",
         mx: "auto",
-        mt: 4,
       }}
     >
       <Box sx={{ flex: "1", mr: 2 }}>
@@ -122,10 +128,9 @@ function Repositories({ username }: RepositoriesProps) {
             padding: 2,
             mt: 2,
             backgroundColor: "#fff",
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <List sx={{ width: "100%" }}>
+          <List sx={{ width: "100%", mb: -2 }}>
             {filteredRepos.length === 0 ? (
               <Box
                 key={"Not found"}

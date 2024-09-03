@@ -5,6 +5,7 @@ interface UserDetailsProps {
   username: string;
 }
 
+// Fetching User Details with Github API call
 function UserDetails({ username }: UserDetailsProps) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["userDetails", username],
@@ -14,10 +15,12 @@ function UserDetails({ username }: UserDetailsProps) {
       ),
   });
 
+  // Handling of different API states
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
+  // html with styling
   return (
     <Card
       sx={{
@@ -28,19 +31,19 @@ function UserDetails({ username }: UserDetailsProps) {
         padding: 2,
         maxWidth: 220,
         width: "100%",
-        borderRadius: "20px", // Rounded corners
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Light shadow
-        position: "sticky", // Make the card sticky
-        top: 50, // Adjust the top position to control where it sticks
-        zIndex: 10, // Ensure the card is above other content
+        borderRadius: "20px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        position: "sticky",
+        top: 50,
+        zIndex: 10,
       }}
     >
       <CardMedia
         component="img"
         sx={{
-          width: 120, // Adjusted profile picture width
-          height: 120, // Maintain aspect ratio
-          borderRadius: "50%", // Circular image
+          width: 120,
+          height: 120,
+          borderRadius: "50%",
           mb: 2,
           mt: 2,
         }}
@@ -48,10 +51,10 @@ function UserDetails({ username }: UserDetailsProps) {
         alt={username}
       />
       <CardContent>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+        <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
           {data.name}
         </Typography>
-        <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
+        <Typography variant="subtitle1" sx={{ color: "text.secondary" }}>
           {username}
         </Typography>
       </CardContent>
