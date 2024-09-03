@@ -8,7 +8,7 @@ The GitHub Repository Viewer is a React application written with typescript that
 
 ## Here's the link!
 
-[MVST-Coding-Challenge](https://66d728ab8e21165df7d4331a--curious-cranachan-6b8ee7.netlify.app/)
+[MVST-Coding-Challenge](https://main--curious-cranachan-6b8ee7.netlify.app/)
 
 ## Prerequisites
 
