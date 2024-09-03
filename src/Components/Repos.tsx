@@ -1,7 +1,7 @@
-// import React, { useState } from "react";
+import { useState } from "react";
+import FilterControls from "./FilterComponents/FilterControls";
 import "./Repos.css";
 import UserDetails from "./User";
-// import FilterControls from "./FilterControls";
 import { useQuery } from "@tanstack/react-query";
 
 interface Repository {
@@ -16,11 +16,15 @@ interface RepositoriesProps {
 }
 
 function Repositories({ username }: RepositoriesProps) {
-  // const [langFilter, setLangFilter] = useState<string[]>([]);
-  // const [nameFilter, setNameFilter] = useState("");
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+  const [nameFilter, setNameFilter] = useState("");
+
+  function updateSelectedLanguages(languages: string[]) {
+    setSelectedLanguages(languages);
+  }
 
   const {
-    isPending,
+    isLoading,
     error,
     data: repos,
     refetch,
@@ -32,33 +36,31 @@ function Repositories({ username }: RepositoriesProps) {
       ),
   });
 
-  // const filtered = repos?.filter((repo) => {
-  //   const matchesName = repo.name
-  //     .toLowerCase()
-  //     .includes(nameFilter.toLowerCase());
-  //   const matchesLanguage =
-  //     langFilter.length === 0 ||
-  //     (repo.language && langFilter.includes(repo.language.toLowerCase()));
-  //   return matchesName && matchesLanguage;
-  // });
+  const uniqueLanguages: string[] = repos
+    ? Array.from(
+        new Set(repos.map((repo: Repository) => repo.language).filter(Boolean))
+      )
+    : [];
 
-  // function handleLanguageChange(event: React.ChangeEvent<HTMLInputElement>) {
-  //   const { value, checked } = event.target;
-  //   setLangFilter((prev) => {
-  //     if (checked) {
-  //       return [...prev, value];
-  //     } else {
-  //       return prev.filter((lang) => lang !== value);
-  //     }
-  //   });
-  // }
+  const filteredRepos = repos?.filter((repo: Repository) => {
+    const matchesName = repo.name
+      .toLowerCase()
+      .includes(nameFilter.toLowerCase());
 
-  // function clearFilters() {
-  //   setNameFilter("");
-  //   setLangFilter([]);
-  // }
+    const matchesLanguage =
+      selectedLanguages.length === 0 ||
+      (repo.language &&
+        selectedLanguages.includes(repo.language.toLowerCase()));
 
-  if (isPending) return "Loading...";
+    return matchesName && matchesLanguage;
+  });
+
+  function clearFilters() {
+    setNameFilter("");
+    setSelectedLanguages([]);
+  }
+
+  if (isLoading) return "Loading...";
   if (error)
     return (
       <div>
@@ -72,22 +74,18 @@ function Repositories({ username }: RepositoriesProps) {
       <UserDetails username={username} />
       <div>
         <h2>Repositories of {username}</h2>
-        {/* <FilterControls
+        <FilterControls
           nameFilter={nameFilter}
-          langValues={langFilter}
-          languages={languages}
-          onNameFilterChange={(e) => {
-            setNameFilter(e.target.value);
-            filterRepos();
-          }}
-          onLanguageChange={(e) => {
-            handleLanguageChange(e);
-            filterRepos();
-          }}
+          selectedLanguages={selectedLanguages}
+          onNameFilterChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setNameFilter(e.target.value)
+          }
+          updateSelectedLanguages={updateSelectedLanguages}
           onClearFilters={clearFilters}
-        /> */}
+          languages={uniqueLanguages}
+        />
         <ul>
-          {repos.map((repo: Repository) => (
+          {filteredRepos.map((repo: Repository) => (
             <li key={repo.id}>
               <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
                 {repo.name} - {repo.language}

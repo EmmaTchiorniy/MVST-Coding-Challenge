@@ -1,10 +1,12 @@
 .user-details {
-  margin-right: 20px;
-  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-.user-details img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
+.card-content {
+  align-items: center;
+  align-content: center;
+}
+
+.user-image {
 }

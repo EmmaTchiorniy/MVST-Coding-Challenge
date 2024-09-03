@@ -2,7 +2,9 @@
   position: relative; /* Ensure the dropdown is positioned relative to this container */
   max-width: none; /* Temporarily remove max-width constraint for testing */
   padding: 0; /* Temporarily remove padding for testing */
-  text-align: left; /* Adjust text alignment if necessary */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .App-header {
@@ -15,4 +17,9 @@
 
 .search-bar {
   padding: 9px;
+}
+
+.search-button {
+  background-color: grey;
+  color: white;
 }

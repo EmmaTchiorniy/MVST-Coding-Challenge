@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Repositories from "./Components/Repos";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Button } from "@mui/material";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +36,13 @@ const App: React.FC = () => {
             onKeyDown={handleKeyPress}
             placeholder="Enter GitHub username"
           />
-          <button onClick={handleSearch}>Search</button>
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            className="search-button"
+          >
+            Search
+          </Button>
           {searchUsername && <Repositories username={searchUsername} />}
         </header>
       </div>
