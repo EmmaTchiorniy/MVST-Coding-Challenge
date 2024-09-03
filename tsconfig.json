@@ -3,17 +3,5 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ],
-
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "es6"],
-    "module": "commonjs",
-    "jsx": "react",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "types": ["jest", "node", "@testing-library/jest-dom"]
-  }
+  ]
 }
