@@ -1,10 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "../src/App/App";
+import App from "../src/App";
 import React from "react";
-import Repositories from "../src/Components/Repositories/Repositories";
+import Repositories from "../src/Components/Repositories";
 import "@testing-library/jest-dom";
 
-jest.mock("../src/Components/Repositories/Repositories", () =>
+jest.mock("../src/Components/Repositories", () =>
   jest.fn(() => <div>Mocked Repositories</div>)
 );
 
