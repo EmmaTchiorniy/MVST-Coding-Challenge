@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FilterControls from "./FilterComponents/FilterControls";
-import UserDetails from "./UserDetails";
+import FilterControls from "../FilterControls/FilterControls";
+import UserDetails from "../UserDetails/UserDetails";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Typography, Button, Link, List } from "@mui/material";
 

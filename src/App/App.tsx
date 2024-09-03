@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Repositories from "./Components/Repositories";
+import Repositories from "../Components/Repositories/Repositories";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Button, TextField, Container, Box } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
