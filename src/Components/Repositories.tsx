@@ -28,15 +28,17 @@ function Repositories({ username }: RepositoriesProps) {
   // Fetching repositories from Github API call
   const {
     isLoading,
-    error,
     data: repos,
     refetch,
   } = useQuery({
     queryKey: ["repoData", username],
     queryFn: () =>
-      fetch(`https://api.github.com/users/${username}/repos`).then((res) =>
-        res.json()
-      ),
+      fetch(`https://api.github.com/users/${username}/repos`).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return null;
+      }),
   });
 
   // Storing repository languages with no copies
@@ -75,12 +77,11 @@ function Repositories({ username }: RepositoriesProps) {
     return "Loading...";
   }
 
-  if (error) {
-    clearFilters();
+  if (!repos) {
     return (
       <Box sx={{ textAlign: "center", mt: 4 }}>
         <Typography variant="h6" color="error">
-          An error has occurred: {error.message}
+          An error has occurred
         </Typography>
         <Button
           variant="contained"
@@ -107,7 +108,7 @@ function Repositories({ username }: RepositoriesProps) {
       sx={{
         display: "flex",
         flexDirection: "row",
-        width: "100%",
+        width: "90%",
         maxWidth: "1200px",
         mx: "auto",
       }}
