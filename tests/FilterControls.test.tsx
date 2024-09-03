@@ -1,6 +1,5 @@
-// FilterControls.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
-import FilterControls from "./FilterControls";
+import FilterControls from "../src/Components/FilterControls/FilterControls";
 import "@testing-library/jest-dom";
 import React from "react";
 

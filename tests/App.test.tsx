@@ -1,11 +1,10 @@
-// App.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "./App";
+import App from "../src/App/App";
 import React from "react";
-import Repositories from "../Components/Repositories/Repositories";
+import Repositories from "../src/Components/Repositories/Repositories";
 import "@testing-library/jest-dom";
 
-jest.mock("../Components/Repositories/Repositories", () =>
+jest.mock("../src/Components/Repositories/Repositories", () =>
   jest.fn(() => <div>Mocked Repositories</div>)
 );
 

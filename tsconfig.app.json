@@ -20,5 +20,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+    // "tests/App.test.tsx",
+    // "tests/FilterControls.test.tsx",
+    // "tests/UserDetails.test.tsx",
+    // "tests/Repositories.test.tsx"
+  ]
 }
