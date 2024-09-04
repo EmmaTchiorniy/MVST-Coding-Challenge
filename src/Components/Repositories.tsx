@@ -81,7 +81,7 @@ function Repositories({ username }: RepositoriesProps) {
     return (
       <Box sx={{ textAlign: "center", mt: 4 }}>
         <Typography variant="h6" color="error">
-          An error has occurred
+          No User Found
         </Typography>
         <Button
           variant="contained"
