@@ -77,4 +77,4 @@ yarn test
 
 - **Handling large results:** Implement pagination for repositories or "show more" button to handle large numbers of results.
 - **Styling:** Enhance the UI with more advanced styling and responsive design features.
-- **Testing:** Implement tests that don't cause problems with MUI and/or React Query. The errors were difficult to interpret but the pages that could not be tested due to these issues were the most important.
+- **Testing:** Implement tests that don't cause problems with MUI and/or React Query. The errors were difficult to interpret but the pages that could not be tested due to these issues were the most important. (Hence they are not included in the test folder)
